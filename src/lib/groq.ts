@@ -15,7 +15,7 @@ async function generateWithRetry(prompt: string): Promise<string> {
         const completion = await groq.chat.completions.create({
             messages: [{ role: 'user', content: prompt }],
             model: MODEL,
-            model: MODEL,
+
             temperature: 0.1, // Lower temperature for precision
             max_tokens: 4096,
             response_format: { type: "json_object" }, // Force JSON mode
