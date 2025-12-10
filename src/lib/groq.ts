@@ -15,8 +15,10 @@ async function generateWithRetry(prompt: string): Promise<string> {
         const completion = await groq.chat.completions.create({
             messages: [{ role: 'user', content: prompt }],
             model: MODEL,
-            temperature: 0.2, // Low temperature for consistent JSON/Analysis
+            model: MODEL,
+            temperature: 0.1, // Lower temperature for precision
             max_tokens: 4096,
+            response_format: { type: "json_object" }, // Force JSON mode
         });
 
         return completion.choices[0]?.message?.content || '';
@@ -164,7 +166,7 @@ export async function parseResumeToStructure(resumeText: string): Promise<Resume
     1. Optimize the resume content (improve verbs, fix grammar, profession tone).
     2. Convert the OPTIMIZED content to JSON.
 
-    Resume: ${resumeText.substring(0, 15000)}
+    Resume: ${resumeText.substring(0, 11000)}
 
     Return JSON with this structure:
     {
