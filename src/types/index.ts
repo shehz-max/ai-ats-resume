@@ -66,7 +66,7 @@ export interface ATSAnalysis {
 }
 
 export interface FormatIssue {
-    type: 'formatting' | 'structure' | 'content';
+    type: 'formatting' | 'structure' | 'content' | 'length';
     severity: 'critical' | 'warning' | 'info';
     message: string;
     fix: string;

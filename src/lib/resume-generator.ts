@@ -115,9 +115,13 @@ export async function generateResumeDOCX(data: ResumeData, options: ResumeStyleO
                                 }
                             }),
                             new Paragraph({
-                                text: data.summary,
-                                font: font,
-                                size: sizes.body,
+                                children: [
+                                    new TextRun({
+                                        text: data.summary,
+                                        font: font,
+                                        size: sizes.body,
+                                    })
+                                ],
                                 spacing: { after: 300 },
                             }),
                         ]
@@ -177,9 +181,13 @@ export async function generateResumeDOCX(data: ResumeData, options: ResumeStyleO
                             spacing: { after: 100 },
                         }),
                         new Paragraph({
-                            text: exp.description,
-                            font: font,
-                            size: sizes.body,
+                            children: [
+                                new TextRun({
+                                    text: exp.description,
+                                    font: font,
+                                    size: sizes.body,
+                                })
+                            ],
                             spacing: { after: 200 },
                         }),
                     ]),
@@ -226,9 +234,13 @@ export async function generateResumeDOCX(data: ResumeData, options: ResumeStyleO
                             ],
                         }),
                         new Paragraph({
-                            text: `${edu.degree} ${edu.field ? `in ${edu.field}` : ''}`,
-                            font: font,
-                            size: sizes.body,
+                            children: [
+                                new TextRun({
+                                    text: `${edu.degree} ${edu.field ? `in ${edu.field}` : ''}`,
+                                    font: font,
+                                    size: sizes.body,
+                                })
+                            ],
                             spacing: { after: 200 },
                         }),
                     ]),
@@ -253,9 +265,13 @@ export async function generateResumeDOCX(data: ResumeData, options: ResumeStyleO
                         }
                     }),
                     new Paragraph({
-                        text: data.skills.join(' • '),
-                        font: font,
-                        size: sizes.body,
+                        children: [
+                            new TextRun({
+                                text: data.skills.join(' • '),
+                                font: font,
+                                size: sizes.body,
+                            })
+                        ],
                     }),
                 ],
             },
