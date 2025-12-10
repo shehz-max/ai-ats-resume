@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { analyzeResumeWithAI, quantifyAchievements } from '@/lib/gemini';
+import { analyzeResumeWithAI, quantifyAchievements } from '@/lib/groq';
 import { checkATSCompatibility, suggestImprovements } from '@/lib/ats-checker';
 import { simulateATSCheck } from '@/lib/ats-simulator';
 import { parseResume } from '@/lib/resume-parser';

@@ -148,7 +148,26 @@ export default function AnalyzePage() {
                         setStructuredData(data);
                     }
                 } catch (e) {
-                    console.error('Failed to structure resume', e);
+                    console.error('Failed to structure resume, using client fallback', e);
+                    // Client-side fallback if API fails completely
+                    if (resumeText) {
+                        setStructuredData({
+                            personalInfo: { fullName: 'Candidate', email: '', phone: '', location: '' },
+                            summary: resumeText.substring(0, 300) + '...',
+                            experience: [{
+                                company: 'Previous Role',
+                                position: 'Role Title',
+                                startDate: 'Date',
+                                endDate: 'Date',
+                                description: 'Details could not be optimized automatically. Please edit this section.',
+                                location: ''
+                            }],
+                            education: [],
+                            skills: ['Professional Skills'],
+                            certifications: [],
+                            projects: []
+                        });
+                    }
                 } finally {
                     setIsStructuring(false);
                 }

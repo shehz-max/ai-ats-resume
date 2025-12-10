@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { parseResumeToStructure } from '@/lib/gemini';
+import { parseResumeToStructure } from '@/lib/groq';
 
 export async function POST(request: NextRequest) {
     try {
