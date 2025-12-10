@@ -4,7 +4,7 @@ import { ATSAnalysis, ResumeData } from '@/types';
 const API_KEY = process.env.GROQ_API_KEY || '';
 const groq = new Groq({ apiKey: API_KEY });
 
-const MODEL = 'llama3-70b-8192';
+const MODEL = 'llama-3.3-70b-versatile';
 
 async function generateWithRetry(prompt: string): Promise<string> {
     if (!API_KEY) {
