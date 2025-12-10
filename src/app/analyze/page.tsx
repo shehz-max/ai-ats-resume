@@ -651,6 +651,34 @@ export default function AnalyzePage() {
                                     )}
                                 </button>
 
+                                <button
+                                    onClick={() => {
+                                        setIsStructuring(true);
+                                        setStructuredData(null); // Clear old data
+                                        const resumeText = sessionStorage.getItem('resumeText');
+                                        if (resumeText) {
+                                            fetch('/api/structure-resume', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ resumeText })
+                                            })
+                                                .then(res => res.json())
+                                                .then(data => {
+                                                    setStructuredData(data);
+                                                    setIsStructuring(false);
+                                                })
+                                                .catch(e => {
+                                                    console.error(e);
+                                                    setIsStructuring(false);
+                                                    alert("Optimization failed. Please check internet.");
+                                                });
+                                        }
+                                    }}
+                                    className="w-full py-3 px-4 rounded-xl font-semibold flex items-center justify-center gap-2 bg-blue-50 text-blue-600 border-2 border-blue-200 hover:border-blue-500 transition-all"
+                                >
+                                    <Sparkles className="w-5 h-5" /> Retry AI Optimizer
+                                </button>
+
                                 {/* Power Features */}
                                 <div className="space-y-3">
                                     <button
