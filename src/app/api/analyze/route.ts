@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         // Parallelize operations: AI Analysis, Standard ATS Check, Quantification
         const results = await Promise.allSettled([
             analyzeResumeWithAI(resumeText, jobDescription),
-            checkATSCompatibility(resumeText, jobDescription),
+            checkATSCompatibility(resumeText),
             quantifyAchievements(resumeText)
         ]);
 
