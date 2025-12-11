@@ -6,7 +6,7 @@ const groq = new Groq({ apiKey: API_KEY });
 
 const MODEL = 'llama-3.3-70b-versatile';
 
-async function generateWithRetry(prompt: string): Promise<string> {
+async function generateWithRetry(prompt: string, jsonMode: boolean = true): Promise<string> {
     if (!API_KEY) {
         throw new Error('Groq API key is not configured');
     }
@@ -18,7 +18,7 @@ async function generateWithRetry(prompt: string): Promise<string> {
 
             temperature: 0.1, // Lower temperature for precision
             max_tokens: 4096,
-            response_format: { type: "json_object" }, // Force JSON mode
+            response_format: jsonMode ? { type: "json_object" } : undefined,
         });
 
         return completion.choices[0]?.message?.content || '';
@@ -58,7 +58,7 @@ function getFallbackAnalysis(resumeText: string, jobDescription: string) {
 }
 
 export async function generateContent(prompt: string): Promise<string> {
-    return generateWithRetry(prompt);
+    return generateWithRetry(prompt, false);
 }
 
 export async function analyzeResumeWithAI(resumeText: string, jobDescription: string) {
@@ -136,7 +136,7 @@ export async function optimizeResumeContent(resumeText: string, jobDescription: 
     
     Return ONLY the optimized text.
   `;
-    return generateWithRetry(prompt);
+    return generateWithRetry(prompt, false);
 }
 
 export async function parseResumeToStructure(resumeText: string): Promise<ResumeData> {
